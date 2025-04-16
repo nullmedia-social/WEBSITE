@@ -14,30 +14,87 @@
 }
 
 * {
-	font-family: Lato, Comic Sans MS;
-	cursor: url("cursors/pointer.svg");
+	font-family: Lato;
+	cursor: url("./cursors/Pointer.cur") 0 0, pointer;
 }
 
 .comicsans {
 	font-family: Comic Sans MS;
+	cursor: url("./cursors/Help.cur") 0 0, help;
 }
 
 .comicsans * {
 	font-family: Comic Sans MS;
+	cursor: url("./cursors/Help.cur") 0 0, help;
 }
 
 .papyrus {
 	font-family: Papyrus;
+	cursor: url("./cursors/Text.cur") 0 0, text;
 }
 
 .papyrus * {
 	font-family: Papyrus;
+	cursor: url("./cursors/Text.cur") 0 0, text;
 }
 
 .impact {
 	font-family: Impact;
+	cursor: url("./cursors/Unavailable.cur") 0 0, not-allowed;
 }
 
 .impact * {
 	font-family: Impact;
+	cursor: url("./cursors/Unavailable.cur") 0 0, not-allowed;
+}
+
+button {
+	cursor: url("./cursors/Link.cur") 0 0, pointer;
+}
+
+button:active {
+	cursor: url("./cursors/Grabbing.cur") 0 0, grabbing;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+	cursor: url("./cursors/Text.cur") 0 0, text;
+}
+
+a {
+	cursor: url("./cursors/Link.cur") 0 0, pointer;
+}
+
+canvas {
+	cursor: url("./cursors/Cross.cur") 0 0, crosshair;
+}
+
+body:active {
+	cursor: url("./cursors/Move.cur") 0 0, move;
+}
+
+/* Optional extra context cursors you can assign dynamically with JS */
+.resize-mode {
+	cursor: url("./cursors/Vert.cur") 0 0, ns-resize;
+}
+
+.zoom-in {
+	cursor: url("./cursors/Zoom-in.cur") 0 0, zoom-in;
+}
+
+.zoom-out {
+	cursor: url("./cursors/Zoom-out.cur") 0 0, zoom-out;
+}
+
+.dragging {
+	cursor: url("./cursors/Grabbing.cur") 0 0, grabbing;
+}
+
+.text-cursor {
+	cursor: url("./cursors/Text.cur") 0 0, text;
+}
+
+.waiting {
+	cursor: url("./cursors/Unavailable.cur") 0 0, wait;
 }
