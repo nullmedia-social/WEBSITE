@@ -1,0 +1,43 @@
+@font-face {
+	font-family: Impact;
+	src: url("fonts/impact.ttf");
+}
+
+@font-face {
+	font-family: Papyrus;
+	src: url("fonts/papyrus.ttf");
+}
+
+@font-face {
+	font-family: Lato;
+	src: url("fonts/lato.ttf");
+}
+
+* {
+	font-family: Lato, Comic Sans MS;
+	cursor: url("cursors/pointer.svg");
+}
+
+.comicsans {
+	font-family: Comic Sans MS;
+}
+
+.comicsans * {
+	font-family: Comic Sans MS;
+}
+
+.papyrus {
+	font-family: Papyrus;
+}
+
+.papyrus * {
+	font-family: Papyrus;
+}
+
+.impact {
+	font-family: Impact;
+}
+
+.impact * {
+	font-family: Impact;
+}
