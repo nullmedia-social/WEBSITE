@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free GPT-2 Chatbot</title>
+  <title>GPT-2 Chatbot</title>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.0.0"></script>
 </head>
 <body>
@@ -14,25 +14,31 @@
   <pre id="response"></pre>
 
   <script>
-    // Load the GPT-2 model (Check the model URL in your hosting platform)
+    // Load GPT-2 Model (Hosted from Hugging Face or other CDN)
     async function loadModel() {
+      // URL for a GPT-2 model hosted on Hugging Face or any CDN with CORS enabled
+      const modelURL = 'https://huggingface.co/gpt2/resolve/main/pytorch_model.bin';
+      
       try {
-        const model = await tf.loadGraphModel('https://your-hosted-model-url/model.json');  // Replace with the correct model path
+        // You can replace the model URL with your own, or download and host the model locally
+        const model = await tf.loadGraphModel(modelURL);  
         return model;
       } catch (error) {
-        console.error('Error loading model:', error);
+        console.error("Failed to load model", error);
         return null;
       }
     }
 
-    // Generate text with the GPT-2 model (Simplified for this example)
     async function generateResponse(model, inputText) {
-      // GPT-2 requires a sequence of tokens, which needs preprocessing
-      // However, for simplicity, we'll simulate the output.
-      // Ideally, use a Hugging Face API or a model handler library to handle text generation.
+      if (!model) {
+        return 'Model failed to load.';
+      }
       
-      const output = `Simulated response to: ${inputText}`;
-      return output;
+      // Here you can implement GPT-2 specific generation logic using the loaded model
+      // This part is where you'd need to adapt the GPT-2 model output to the user's input
+      // Example with a simple random response (to be replaced by actual inference logic)
+      const response = `Response for: "${inputText}"\nThis is a placeholder response.`;
+      return response;
     }
 
     document.getElementById('send').addEventListener('click', async () => {
@@ -41,12 +47,8 @@
       responseElement.textContent = 'Thinking...';
 
       const model = await loadModel();
-      if (model) {
-        const output = await generateResponse(model, userInput);
-        responseElement.textContent = output;
-      } else {
-        responseElement.textContent = 'Error loading model. Please try again later.';
-      }
+      const output = await generateResponse(model, userInput);
+      responseElement.textContent = output;
     });
   </script>
 </body>
