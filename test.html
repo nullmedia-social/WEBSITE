@@ -14,16 +14,25 @@
   <pre id="response"></pre>
 
   <script>
-    // Load GPT-2 Model (Assumes it's hosted locally)
+    // Load the GPT-2 model (Check the model URL in your hosting platform)
     async function loadModel() {
-      const model = await tf.loadLayersModel('models/gpt2/model.json');  // Path to your local model
-      return model;
+      try {
+        const model = await tf.loadGraphModel('https://your-hosted-model-url/model.json');  // Replace with the correct model path
+        return model;
+      } catch (error) {
+        console.error('Error loading model:', error);
+        return null;
+      }
     }
 
+    // Generate text with the GPT-2 model (Simplified for this example)
     async function generateResponse(model, inputText) {
-      // Implement GPT-2 prediction here
-      const response = await model.predict(inputText);  // Modify this with GPT-2 prediction logic
-      return response;
+      // GPT-2 requires a sequence of tokens, which needs preprocessing
+      // However, for simplicity, we'll simulate the output.
+      // Ideally, use a Hugging Face API or a model handler library to handle text generation.
+      
+      const output = `Simulated response to: ${inputText}`;
+      return output;
     }
 
     document.getElementById('send').addEventListener('click', async () => {
@@ -32,8 +41,12 @@
       responseElement.textContent = 'Thinking...';
 
       const model = await loadModel();
-      const output = await generateResponse(model, userInput);
-      responseElement.textContent = output;
+      if (model) {
+        const output = await generateResponse(model, userInput);
+        responseElement.textContent = output;
+      } else {
+        responseElement.textContent = 'Error loading model. Please try again later.';
+      }
     });
   </script>
 </body>
