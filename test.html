@@ -14,31 +14,45 @@
   <pre id="response"></pre>
 
   <script>
-    // Load GPT-2 Model (Hosted from Hugging Face or other CDN)
+    // Load GPT-2 Model (Assumes it's hosted externally)
     async function loadModel() {
-      // URL for a GPT-2 model hosted on Hugging Face or any CDN with CORS enabled
-      const modelURL = 'https://huggingface.co/gpt2/resolve/main/pytorch_model.bin';
-      
+      const modelURL = 'https://huggingface.co/gpt2/resolve/main/pytorch_model.bin'; // Change to actual accessible model URL
       try {
-        // You can replace the model URL with your own, or download and host the model locally
-        const model = await tf.loadGraphModel(modelURL);  
+        const model = await tf.loadGraphModel(modelURL);
         return model;
       } catch (error) {
-        console.error("Failed to load model", error);
+        console.error("Failed to load model:", error);
         return null;
       }
     }
 
+    // Tokenize the input text (dummy tokenizer for example)
+    function tokenize(text) {
+      // Simple example: Convert text to token IDs (real tokenization is much more complex)
+      return text.split(' ').map(word => word.length); // Placeholder logic
+    }
+
+    // Generate a response using the model (actual generation logic here)
     async function generateResponse(model, inputText) {
       if (!model) {
         return 'Model failed to load.';
       }
-      
-      // Here you can implement GPT-2 specific generation logic using the loaded model
-      // This part is where you'd need to adapt the GPT-2 model output to the user's input
-      // Example with a simple random response (to be replaced by actual inference logic)
-      const response = `Response for: "${inputText}"\nThis is a placeholder response.`;
-      return response;
+
+      const tokenizedInput = tokenize(inputText);  // Tokenize the input
+      const inputTensor = tf.tensor2d([tokenizedInput]);  // Convert to tensor
+
+      try {
+        // Run inference (adjust based on how the model expects the input)
+        const output = model.predict(inputTensor);  // This is a placeholder, you need to process the output
+
+        // Convert the output tensor to human-readable text (simple example, real logic will vary)
+        const predictedTokens = output.dataSync();  // Example, you need to decode this back to text
+        const response = predictedTokens.join(' ');  // Join tokens into a string (this is oversimplified)
+        return response;
+      } catch (error) {
+        console.error("Error during generation:", error);
+        return 'Failed to generate response.';
+      }
     }
 
     document.getElementById('send').addEventListener('click', async () => {
